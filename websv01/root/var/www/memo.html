@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>memo.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="%E4%BE%BF%E5%88%A9%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">便利コマンド</h1>
+<ol>
+<li>
+<p>docker-machineのコマンド <a href="https://qiita.com/spesnova/items/073dd64a8a1d580d9ae9">参考</a></p>
+<ol>
+<li>
+<p>ホストマシンの作成（ホスト自体も作成）</p>
+<pre class="hljs"><code><div>docker-machine create --driver virtualbox [ホスト名]
+</div></code></pre>
+</li>
+<li>
+<p>既存のSVにdockerを入れて、docker-machine配下に</p>
+<pre class="hljs"><code><div>docker-machine -D create --driver generic --generic-ip-address [host server ip address] --generic-ssh-port [ssh port] --generic-ssh-user [ssh user] [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホストの一覧表示</p>
+<pre class="hljs"><code><div>docker-machine ls
+</div></code></pre>
+</li>
+<li>
+<p>ホスト停止</p>
+<pre class="hljs"><code><div>docker-machine stop [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト強制停止</p>
+<pre class="hljs"><code><div>docker-machine <span class="hljs-built_in">kill</span> [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト起動</p>
+<pre class="hljs"><code><div>docker-machine start [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト再起動</p>
+<pre class="hljs"><code><div>docker-machine restart [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト切り替え</p>
+<pre class="hljs"><code><div>docker-machine active [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト削除</p>
+<pre class="hljs"><code><div>docker-machine rm [host name]
+</div></code></pre>
+</li>
+<li>
+<p>dockerクライアント用の環境変数確認</p>
+<pre class="hljs"><code><div>docker-machine config [host name]
+or
+docker-machine $(docker-machine config [host_name]) ps
+</div></code></pre>
+</li>
+<li>
+<p>docker関連の環境変数確認</p>
+<pre class="hljs"><code><div>env | grep DOCKER
+</div></code></pre>
+</li>
+<li>
+<p>ホストのdockerにマウント</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">eval</span> $(docker-machine env [host name])
+</div></code></pre>
+</li>
+<li>
+<p>ホストのdockerマウント解除</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">eval</span> $(docker-machine env -u)
+</div></code></pre>
+</li>
+<li>
+<p>ホストマシンのIP表示</p>
+<pre class="hljs"><code><div>docker-machine ip [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホストマシンの情報表示</p>
+<pre class="hljs"><code><div>docker-machine inspect [host name]
+</div></code></pre>
+</li>
+<li>
+<p>ホストへssh接続</p>
+<pre class="hljs"><code><div>docker-machine ssh [host name]
+</div></code></pre>
+</li>
+<li>
+<p>sshでコマンド実行</p>
+<pre class="hljs"><code><div>docker-machine ssh [host name] <span class="hljs-string">"command"</span>
+docker-machine ssh [host name] -- [<span class="hljs-built_in">command</span>] [option]
+</div></code></pre>
+</li>
+<li>
+<p>既にあるdockerホストをdocker-machineの管理下に</p>
+<pre class="hljs"><code><div>docker-machine create --url tcp://[ipaddress]:2375 [host name]
+</div></code></pre>
+</li>
+<li>
+<p>アクティブなdockerホストの確認</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">echo</span> <span class="hljs-variable">$DOCKER_HOST</span>
+</div></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>docker-composeコマンド</p>
+<ol>
+<li>
+<p>コンテナ立ち上げ</p>
+<pre class="hljs"><code><div>docker-compose -f docker-compose.yml up -d
+docker-compose -f docker-compose.yml up -d --build
+docker-compose -f docker-compose.yml up -d --build --force-recreate
+</div></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>dockerコマンド</p>
+<ol>
+<li>
+<p>コンテナのログ確認</p>
+<pre class="hljs"><code><div>docker logs [container name]
+</div></code></pre>
+</li>
+<li>
+<p>ネットワーク一覧の表示</p>
+<pre class="hljs"><code><div>docker network list
+</div></code></pre>
+</li>
+<li>
+<p>ネットワークの詳細</p>
+<pre class="hljs"><code><div>docker network inspect [network name]
+</div></code></pre>
+</li>
+<li>
+<p>ネットワークの作成</p>
+<pre class="hljs"><code><div>docker network create --driver bridge [ネットワーク名]
+</div></code></pre>
+</li>
+<li>
+<p>ネットワークの削除 <a href="https://qiita.com/musatarosu/items/31d6293a93e75ca6073e">参考</a></p>
+<pre class="hljs"><code><div>docker network disconnect -f [network name] [conteniar name]
+</div></code></pre>
+</li>
+<li>
+<p>コンテナの中に入る</p>
+<pre class="hljs"><code><div>docker <span class="hljs-built_in">exec</span> -i -t [コンテナ名] bash
+</div></code></pre>
+</li>
+<li>
+<p>コンテナ一覧表示</p>
+<pre class="hljs"><code><div>docker ps -a
+</div></code></pre>
+</li>
+<li>
+<p>コンテナ全削除</p>
+<pre class="hljs"><code><div>docker rm --force $(docker ps -aq)
+</div></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>alpine linux</p>
+<ol>
+<li>
+<p>apkの更新</p>
+<pre class="hljs"><code><div>apk update
+</div></code></pre>
+</li>
+<li>
+<p>アプリをまとめてインストール</p>
+<pre class="hljs"><code><div>apk --no-cache add --virtual build-dependencies curl build-base
+</div></code></pre>
+</li>
+<li>
+<p>削除</p>
+<pre class="hljs"><code><div>apk del --purge build-dependencies
+</div></code></pre>
+</li>
+<li>
+<p>インストール済みのものを確認</p>
+<pre class="hljs"><code><div>apk info
+</div></code></pre>
+</li>
+<li>
+<p>リポジトリ確認</p>
+<pre class="hljs"><code><div>cat /etc/apk/repositories
+</div></code></pre>
+</li>
+<li>
+<p>最新のリポジトリを追加</p>
+<pre class="hljs"><code><div>{
+    <span class="hljs-built_in">echo</span> @edge http://nl.alpinelinux.org/alpine/edge/main
+    <span class="hljs-built_in">echo</span> @edgecommunity http://nl.alpinelinux.org/alpine/edge/community
+    <span class="hljs-built_in">echo</span> @testing http://nl.alpinelinux.org/alpine/edge/testing
+} &gt;&gt; /etc/apk/repositories
+apk update
+apk add --upgrade apk-tools@edge
+apk update
+</div></code></pre>
+</li>
+<li>
+<p>edgeのリポジトリからインストール</p>
+<pre class="hljs"><code><div>apk --no-cache add elasticsearch@edgecommunity=6.1.1-r0
+</div></code></pre>
+</li>
+<li>
+<p>パッケージがインストールされた場所の確認</p>
+<pre class="hljs"><code><div>apk info -L [package name]
+</div></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>その他</p>
+<ol>
+<li>
+<p>centosのfirewallにdocker接続用のポートを開ける</p>
+<pre class="hljs"><code><div>sudo firewall-cmd --zone=public --add-port=2376/tcp --permanent
+sudo firewall-cmd --reload
+</div></code></pre>
+</li>
+<li>
+<p>テキストファイルの中身をコンソール上に出力</p>
+<pre class="hljs"><code><div>cat [file name]
+</div></code></pre>
+</li>
+<li>
+<p>コマンドの結果をテキストに上書き出力</p>
+<pre class="hljs"><code><div>[<span class="hljs-built_in">command</span>] &gt; [file name]
+[<span class="hljs-built_in">command</span>] 1&gt; [file name] <span class="hljs-comment"># 標準出力（デフォルト）</span>
+[<span class="hljs-built_in">command</span>] 2&gt; [file name] <span class="hljs-comment"># エラー出力</span>
+[<span class="hljs-built_in">command</span>] &amp;&gt; [file name] <span class="hljs-comment"># 標準出力とエラー出力を両方</span>
+</div></code></pre>
+</li>
+<li>
+<p>コマンドの結果をテキストに追加出力</p>
+<pre class="hljs"><code><div>[<span class="hljs-built_in">command</span>] &gt;&gt; [file name]
+</div></code></pre>
+</li>
+<li>
+<p>ホスト上のディレクトリをコピー</p>
+<pre class="hljs"><code><div>scp -r -P [port] [user]@[host name]:[target path] [outpu path]
+</div></code></pre>
+</li>
+<li>
+<p>nginxの設定を確認</p>
+<pre class="hljs"><code><div>cat /etc/nginx/conf.d/default.conf
+</div></code></pre>
+</li>
+</ol>
+</li>
+</ol>
+
+</body>
+</html>

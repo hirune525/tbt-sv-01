@@ -1,0 +1,91 @@
+# ~/envs/tbt-sv-01/docker-compose.yml
+version: '2'
+services:
+  nginx-proxy:
+    # docker image
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+    logging:
+      options:
+        max-size: 5m
+        max-file: "10"
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-letsencrypt
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    volumes_from:
+      - nginx-proxy
+    restart: always
+
+  websv01:
+    build: ./websv01
+    container_name: websv01
+    expose:
+      - 80
+      - 443
+    environment:
+      VIRTUAL_HOST: develop.tapratec.com
+      LETSENCRYPT_HOST: develop.tapratec.com
+      LETSENCRYPT_EMAIL: hirune525@gmail.com
+    restart: always
+
+  notebook:
+    build: ./notebook
+    container_name: notebook
+    volumes:
+      - ./volumes/notebook:/home/jovyan/work
+    expose:
+      - 80
+      - 443
+    environment:
+      VIRTUAL_HOST: notebook.tapratec.com
+      VIRTUAL_PORT: 8888
+      LETSENCRYPT_HOST: notebook.tapratec.com
+      LETSENCRYPT_EMAIL: hirune525@gmail.com
+    restart: always
+
+  mariadb:
+    build: ./mariadb
+    container_name: mariadb
+    volumes:
+      - ./volumes/mariadb:/var/lib/mysql
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /etc/mysql/secrets/mysql_root_passward
+      MYSQL_USER_FILE: /etc/mysql/secrets/mysql_user
+      MYSQL_PASSWORD_FILE: /etc/mysql/secrets/mysql_passward
+    restart: always
+
+  dbadminer:
+    image: adminer
+    container_name: dbadminer
+    restart: always
+    expose:
+      - 80
+      - 443
+    depends_on:
+      - mariadb
+    environment:
+      VIRTUAL_HOST: mariadb.tapratec.com
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: mariadb.tapratec.com
+      LETSENCRYPT_EMAIL: hirune525@gmail.com
+
+# 各サービスにyml作成するのでネットワークを設定
+# https://qiita.com/ka2asd/items/372d30be64c57a8a81b1
+networks:
+  default:
+    external:
+      name: common_link
